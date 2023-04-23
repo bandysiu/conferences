@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Conference;
-use Couchbase\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreConferenceRequest;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ConferencesController extends Controller
 {
@@ -23,9 +21,9 @@ class ConferencesController extends Controller
     public function index(): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
     {
 
-        $conferences = Conference::all(); // assuming "Conference" is the model for conferences
+        $conferences = Conference::all();
 
-        return view('conferences.index', compact('conferences'));
+        return view('conference.index', compact('conferences'));
     }
 
     /**
@@ -35,7 +33,7 @@ class ConferencesController extends Controller
      */
     public function create()
     {
-        return \view('conferences.create');
+        return \view('conference.create');
     }
 
     /**
@@ -49,9 +47,9 @@ class ConferencesController extends Controller
         $validated = $request->validated();
         $conferenceItem = $conference->create($validated);
 
-        $request->session()->flash('status', 'Conference created!');
+        $request->session()->flash('status', 'Conference created');
 
-        return redirect()-> route('conferences.show', ['conference'=>$conferenceItem->id]);
+        return redirect()-> route('conference.show', ['conference'=>$conferenceItem->id]);
     }
 
     /**
@@ -62,7 +60,7 @@ class ConferencesController extends Controller
      */
     public function show(int $id): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
     {
-        return view('conferences.show', ['conference' => Conference::findOrFail($id)]);
+        return view('conference.show', ['conference' => Conference::findOrFail($id)]);
     }
 
     /**
@@ -71,7 +69,7 @@ class ConferencesController extends Controller
     public function edit(Conference $conference)
     {
 
-        return view('conferences.edit', compact('conference'));
+        return view('conference.edit', compact('conference'));
     }
 
     /**
@@ -88,9 +86,9 @@ class ConferencesController extends Controller
         $conference->fill($validated);
         $conference->save();
 
-        $request->session()->flash('status', 'Conference was updated!');
+        $request->session()->flash('status', 'Conference was updated');
 
-        return redirect()->route('conferences.show', ['conference'=>$conference->id]);
+        return redirect()->route('conference.show', ['conference'=>$conference->id]);
     }
 
     /**
@@ -104,8 +102,8 @@ class ConferencesController extends Controller
         $conference = Conference::findOrFail($id);
         $conference->delete();
 
-        session()->flash('status', 'Conference was deleted!');
+        session()->flash('status', 'Conference was deleted');
 
-        return redirect()->route('conferences.index');
+        return redirect()->route('conference.index');
     }
 }
