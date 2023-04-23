@@ -4,12 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login Form</title>
-    <!-- Link to Font Awesome CSS -->
     <link rel="stylesheet" href="resources/views/auth/login.css"
           integrity="sha512-M6+aTah1IfvC9XzfqPbY/FKjMkqlbSSsQe0mKJjKmLl88/8fO1XKjGZ/2QZq3PGr6zNkNp1y6EhN10W8zsJgw=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <style>
-        /* Align labels and inputs */
         label {
             display: inline-block;
             width: 100px;
@@ -27,7 +25,6 @@
             margin-bottom: 10px;
         }
 
-        /* Add colors and Font Awesome icons to error messages */
         p {
             color: red;
             margin-top: 5px;
